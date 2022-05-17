@@ -22,5 +22,9 @@ Imax = Gyy+Gxx - minima;
 z = .001;
 Coherence = 1 - minima./(Imax+z);
 Coherence = Coherence.*(denom>z);
+
+
+
+
 end
  
