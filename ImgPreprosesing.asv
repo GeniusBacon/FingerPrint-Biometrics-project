@@ -1,0 +1,43 @@
+Img=imread('DB\1_4.jpg');
+%Input image
+figure,imshow(Img);
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%Adjust Mean,Variance
+NormalizedFP = Normalization(Img,100,10000);
+figure,imshow(NormalizedFP);
+
+ Img=rgb2gray(Img);
+ HistFP = histeq(Img);
+ figure,imshow(HistFP);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+SegmentedFP = fingerprint_segmentation(NormalizedFP);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Binarizing Image
+ Threshold=graythresh(Imgs);
+ Imgs=imbinarize(Imgs,Threshold);
+ figure,imshow(Imgs);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ [C,D]=ridgeOrientationMethodNoThree(Img,hsize,hsigma,hsize2,hsigma2)
+
+ 
+ 
+ 
+ 
+ 
+ 
+   
+%blksze = 16; thresh = 0.1;
+ %   [normim, mask] = ridgesegment(Img, blksze, thresh);
+% 
+% [orientim, reliability, coherence] =ridgeorient(res,1, 5, 5);
+% figure,imshow(orientim);
+% figure,imshow(reliability);
+% figure,imshow(coherence);
+
+
+% 
+% Fourier=fft(BinarizedImg);
+% figure,imshow(Fourier);
+% 
