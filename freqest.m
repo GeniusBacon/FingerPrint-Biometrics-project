@@ -59,7 +59,6 @@ function freqim =  freqest(im, orientim, windsze, minWaveLength, maxWaveLength)
     % from being mucked up.
     cropsze = fix(rows/sqrt(2)); offset = fix((rows-cropsze)/2);
     rotim = rotim(offset:offset+cropsze, offset:offset+cropsze);
-
     % Sum down the columns to get a projection of the grey values down
     % the ridges.
     proj = sum(rotim);

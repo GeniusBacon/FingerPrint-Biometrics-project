@@ -11,7 +11,7 @@ function [x,y,u,v] = directionmap(DirectionMask, s, I)
     % Determine placement of direction vectors
     
     [x,y] = meshgrid(s:s:c-s, s:s:r-s);
-    figure,mesh(y);
+    %figure,mesh(y);
     x = x-xoff;
     y = y-yoff;
     
@@ -20,7 +20,7 @@ function [x,y,u,v] = directionmap(DirectionMask, s, I)
     % Orientation vectors
     u = xoff*2;
     v = yoff*2;
-     quiver(x,y,u,v,0,'.','linewidth',1, 'color','r');
-      axis equal, axis ij,  hold off
+     %quiver(x,y,u,v,0,'.','linewidth',1, 'color','r');
+      %axis equal, axis ij,  hold off
 end
 

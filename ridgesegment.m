@@ -56,3 +56,5 @@ function [normim, mask, maskind] = ridgesegment(im, blksze, thresh)
     % standard deviation.
     im = im - mean(im(maskind));
     normim = im/std(im(maskind));    
+   
+end
