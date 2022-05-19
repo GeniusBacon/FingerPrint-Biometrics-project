@@ -37,8 +37,8 @@
 % January 2005
 
     
-function freqim =  freqest(im, orientim, windsze, minWaveLength, maxWaveLength)
-    
+function [freqim ,waveLength] =  freqest(im, orientim, windsze, minWaveLength, maxWaveLength)
+    waveLength=0;
     debug = 0;
     
     [rows,cols] = size(im);

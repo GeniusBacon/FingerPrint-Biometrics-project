@@ -50,7 +50,7 @@
 %
 % January 2005
 
-function [freq, medianfreq] = ridgefreq(im, mask, orient, blksze, windsze, ...
+function [freq, medianfreq,Wavelength] = ridgefreq(im, mask, orient, blksze, windsze, ...
                                         minWaveLength, maxWaveLength)     
     
     [rows, cols] = size(im);
@@ -61,7 +61,7 @@ function [freq, medianfreq] = ridgefreq(im, mask, orient, blksze, windsze, ...
           blkim = im(r:r+blksze-1, c:c+blksze-1);   
           blkor = orient(r:r+blksze-1, c:c+blksze-1);       
           
-          freq(r:r+blksze-1,c:c+blksze-1) = freqest(blkim, blkor, windsze, minWaveLength, maxWaveLength);
+          [freq(r:r+blksze-1,c:c+blksze-1),Wavelength(r:r+blksze-1,c:c+blksze-1)] = freqest(blkim, blkor, windsze, minWaveLength, maxWaveLength);
         end
     end
 

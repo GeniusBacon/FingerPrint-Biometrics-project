@@ -37,8 +37,8 @@
 % http://www.csse.uwa.edu.au/~pk
 
 
-function [orientim, reliability] = ...
-             ridgeorient(im, gradientsigma, blocksigma, orientsmoothsigma)
+function [Gx,Gy,orientim, reliability] = ...
+             ridgeorientation(im, gradientsigma, blocksigma, orientsmoothsigma)
         
     [rows,cols] = size(im);
     

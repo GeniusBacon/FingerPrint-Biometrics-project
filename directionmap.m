@@ -21,6 +21,6 @@ function [x,y,u,v] = directionmap(DirectionMask, s, I)
     u = xoff*2;
     v = yoff*2;
      %quiver(x,y,u,v,0,'.','linewidth',1, 'color','r');
-      %axis equal, axis ij,  hold off
+      axis equal, axis ij,  hold off
 end
 

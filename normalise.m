@@ -66,6 +66,6 @@ function n = normalise(im, reqmean, reqvar)
 	im = im/std(im(:));      % Zero mean, unit std dev
 
 	n = reqmean + im*sqrt(reqvar);
-    figure,imshow(n);
+    %figure,imshow(n);
     end
     
