@@ -1,4 +1,4 @@
-Img=imread('DB\first_session\12_1.jpg');
+Img=imread('DB\32_3.jpg');
 %Input image
 figure,imshow(Img); axis off; title('Original Image'); hold off;
 
@@ -81,20 +81,13 @@ binarisedMask = BinaryImg.*mask2;
 skeleton = spured.*mask2;
 figure; imshow(skeleton,[]); axis off; title('Skeleton'); hold off;
 
+[featureRidge,featureBifurcation]=MinutiaeExtraction(skeleton,mask2);
+[ridgeY, ridgeX] = find(featureRidge == 2);
+figure; imshow(skeleton); axis off; title('Ridge endings'); hold on; plot(ridgeX, ridgeY, 'ro'); hold off;
+[bifurcationY, bifurcationX] = find(featureBifurcation == 4);
+figure; imshow(skeleton); axis off; title('Bifurcations'); hold on; plot(bifurcationX, bifurcationY, 'bs'); hold off;
 
 
+orientation = rad2deg(Direction);
 
-
-
-
-
-[Gx2, Gy2, D2, C2] = ridgeorientation(EnhancedImg, 1, 17, 3);
-C2Mask = double(C2).*double(mask2);
-minima = ~imregionalmin(C2Mask);
-candidateFeatures = double(~minima).*double(mask2);
-[minimaY, minimaX] = find(candidateFeatures == 1);
-%figure; imshow(C2Mask, []); axis off; title('Coherence 2');
-%figure; imshow(minima, []); axis off; title('Minima'); hold on; plot(minimaX, minimaY, 'og', 'MarkerSize',10); hold off;
-
-candidateRegion = ~imbinarize(C2Mask,0.5).*double(mask2);
-%figure; imshow(candidateRegion,[]); axis off; title('Candidate Region');
+ 
