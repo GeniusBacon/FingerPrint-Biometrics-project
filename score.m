@@ -28,6 +28,7 @@ function [ sm ] = score( T1, T2 )
                 DTheta=min(DTheta,360-DTheta);
                 if DTheta<TT
                     n=n+1;        %Increase Score
+                     
                     Found=1;
                 end
             end
