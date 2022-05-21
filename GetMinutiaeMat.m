@@ -1,12 +1,12 @@
-function Minutiae =GetMinutiaeMat(Fingerprint)
+function Minutiae  = GetMinutiaeMat(Fingerprint)
     [EnhancedImg,Direction,freq]=ImgPreprocessing(Fingerprint);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %Feature Extraction
     [bifurcationX,bifurcationY,bifurcationOrientation,ridgeX,ridgeY,RidgeOrientation]  =FeatureExtraction(EnhancedImg,Direction,freq);
-    bifurcationsze=size(bifurcationX,1);
+    bifurcationSize=size(bifurcationX,1);
     ridgeSize=size(ridgeX,1);
-    Minutiae=zeros(bifurcationsze+ridgeSize,4);
-    for i=1:bifurcationsze
+    Minutiae=zeros(bifurcationSize+ridgeSize,4);
+    for i=1:bifurcationSize
     Minutiae(i,1)=bifurcationX(i);
     Minutiae(i,2)=bifurcationY(i);
     Minutiae(i,3)=3;

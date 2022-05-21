@@ -1,0 +1,13 @@
+img1=imread('DB\14_1.jpg');
+img2=imread('DB\14_5.jpg');
+
+%figure; imshow(img1,[]);  axis off; title('original1'); hold on;
+
+m1 = GetMinutiaeMat(img1);
+m2 = GetMinutiaeMat(img2);
+
+Minutiae = MinFilter(m1);
+Minutiae = MinFilter(m2);
+%matching = matchTwoMinutiaes(m1, m2);
+
+s= match(m1 , m2 , 1);

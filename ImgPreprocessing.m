@@ -4,18 +4,22 @@ function [EnhancedImg,Direction,freq]=ImgPreprocessing(Img)
 
 %Adjust Mean,Variance
 %Img=rgb2gray(Img);
-%NormalizedFP = Normalization(Img,100,10000);           % seems to just turn the background greyer: TEST ACCURACY
+%NormalizedFP = Normalization(Img,100,10000);           
+!seems to just turn the background greyer: TEST ACCURACY
 %figure, imshow(NormalizedFP); axis off; title('Task 1 Normalization'); hold off;
 
 Sharpened = imsharpen(Img,'Radius', 1.5,'Amount',1.2);
 %figure; imshow(Sharpened, []); axis off; title('Sharpened'); hold off;
 
-HistFP = histeq(Sharpened);        % not used yet
+HistFP = histeq(Sharpened);        
+!not used yet
 %figure,imshow(HistFP); axis off; title('Histogram Equalization'); hold off;
-%Sharpened = HistFP;                % testing to use the histFP, but seems to cause worse results.: TEST ACCURACY
+%Sharpened = HistFP;                
+!testing to use the histFP, but seems to cause worse results.: TEST ACCURACY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Binarizing Image                    % Try it before the Fourrier TESTINGGG: TEST ACCURACY
+% Binarizing Image                    
+!Try it before the Fourrier TESTINGGG: TEST ACCURACY
 % Threshold=graythresh(Img);
 % BinaryImg=imbinarize(Img,Threshold);
 % Sharpened = BinaryImg;
@@ -29,13 +33,18 @@ J = fftshift(fft2(double(Sharpened)));
 Jh = imfilter(J,h);
 Jh = J - Jh;
 Fourierred = abs(ifft2(ifftshift(Jh)));
-%figure; imshow(Fourierred, []); axis off; title('After FFT'); hold off;     % should be affecting the frequency
+%figure; imshow(Fourierred, []); axis off; title('After FFT'); hold off;     
 
-[SegmentedFP, mask] = ridgesegment(Fourierred,16,0.1); %3ando gabor
-%figure,imshow(SegmentedFP); axis off; title('Segmentation'); hold off;      % seems to be just like the after fft
-%SegmentedFP = Fourierred;   %               TESTING: TEST ACCURACY
+!should be affecting the frequency
 
-%Binarizing Image                    : Try it before the Fourrier : TEST ACCURACY
+[SegmentedFP, mask] = ridgesegment(Fourierred,16,0.1);  !feehgabor
+%figure,imshow(SegmentedFP); axis off; title('Segmentation'); hold off;      
+!seems to be just like the after fft
+%SegmentedFP = Fourierred;   
+!TESTING: TEST ACCURACY
+
+%Binarizing Image                    
+!Try it before the Fourrier : TEST ACCURACY
  %Threshold=graythresh(Img);
  %BinaryImg=imbinarize(Img,Threshold);
  %figure,imshow(BinaryImg);

@@ -12,7 +12,7 @@ function [ S ] = match( M1, M2, display_flag )
     if nargin==2; display_flag=0; end
     M1=M1(M1(:,3)<5,:);
     M2=M2(M2(:,3)<5,:);    
-    count1=size(M1,1); count2=size(M2,1); 
+    count1=size(M1,1); count2=size(M2,1);                                       !TESTINGGGGGGG
     bi=0; bj=0; ba=0; % Best i,j,alpha
     S=0;            % Best Similarity Score
     for i=1:count1

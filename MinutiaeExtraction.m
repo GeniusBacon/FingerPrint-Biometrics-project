@@ -1,6 +1,10 @@
-function [featureRidge,featureBifurcation]=MinutiaeExtraction(skeleton,mask2)
+function [potentialRidge,potentialBifurcation, cleanImg]=MinutiaeExtraction(skeleton,mask2)
 [sizeX, sizeY] = size(skeleton);
+%figure; imshow(skeleton,[]);  axis off; title('skeleton'); hold on;
+%figure; imshow(mask2,[]);  axis off; title('mask'); hold on;
 Im = ~xor(skeleton, mask2);
+cleanImg = Im;
+%figure; imshow(Im,[]);  axis off; title('Im'); hold on;
 % Window
 WindowSize = 3;
 window = zeros(WindowSize);
@@ -13,8 +17,8 @@ double temp(row,col);
 temp = zeros(row,col);
 temp( (center):(end-border), (center):(end-border) ) = Im(:,:);
 % Minutiae containers
-featureRidge       = zeros(row,col);
-featureBifurcation = zeros(row,col);
+potentialRidge       = zeros(row,col);
+potentialBifurcation = zeros(row,col);
 for x = (center+10):(sizeX+border-10)
     for y = (center+10):(sizeY+border-10)
         % fill in window with values from temp
@@ -29,12 +33,17 @@ for x = (center+10):(sizeX+border-10)
         end
         if (window(center,center) == 0)
             
-            featureRidge(x,y)       = sum(sum(~window));
-            featureBifurcation(x,y) = sum(sum(~window));
+            potentialRidge(x,y)       = sum(sum(~window));
+            potentialBifurcation(x,y) = sum(sum(~window));
+            borderBool = isBorder(mask2, x, y);
+            if (borderBool == 1)
+                potentialRidge(x,y) = -1;       % done to prevent borders
+                potentialBifurcation(x,y) = -1;
+            end
         end
     end
 end
 % Resize area
-featureRidge = featureRidge(1+border:end-border,1+border:end-border);
-featureBifurcation = featureBifurcation(1+border:end-border,1+border:end-border);
+potentialRidge = potentialRidge(1+border:end-border,1+border:end-border);
+potentialBifurcation = potentialBifurcation(1+border:end-border,1+border:end-border);
 end

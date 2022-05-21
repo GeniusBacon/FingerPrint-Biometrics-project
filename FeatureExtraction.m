@@ -1,5 +1,5 @@
 function    [bifurcationX,bifurcationY,bifurcationOrientation,ridgeX,ridgeY,RidgeOrientation]  =FeatureExtraction(EnhancedImg,Direction,freq)
-[seg, mask2] = ridgesegment(EnhancedImg,16,0.1); %3ando gabor
+[seg, mask2] = ridgesegment(EnhancedImg,16,0.1); %feeh gabor
 Threshold=graythresh(EnhancedImg);
 BinaryImg=imbinarize(EnhancedImg,Threshold);
 %figure,imshow(BinaryImg);
@@ -10,11 +10,11 @@ binarisedMask = BinaryImg.*mask2; %%%%%%eh lazmet el line da
 skeleton = spured.*mask2;
 %figure; imshow(skeleton,[]); axis off; title('Skeleton'); hold off;
 
-[featureRidge,featureBifurcation]=MinutiaeExtraction(skeleton,mask2);
-[ridgeY, ridgeX] = find(featureRidge == 2);
-%figure; imshow(skeleton); axis off; title('Ridge endings'); hold on; plot(ridgeX, ridgeY, 'ro'); hold off;
-[bifurcationY, bifurcationX] = find(featureBifurcation == 4);
-%figure; imshow(skeleton); axis off; title('Bifurcations'); hold on; plot(bifurcationX, bifurcationY, 'bs'); hold off;
+[potentialRidgeEnd,potentialBifurcation, cleanImg]=MinutiaeExtraction(skeleton,mask2);
+[ridgeY, ridgeX] = find(potentialRidgeEnd == 2);
+figure; imshow(skeleton); axis off; title('Ridge endings'); hold on; plot(ridgeX, ridgeY, 'ro'); hold off;
+[bifurcationY, bifurcationX] = find(potentialBifurcation == 4);
+figure; imshow(skeleton); axis off; title('Bifurcations'); hold on; plot(bifurcationX, bifurcationY, 'bs'); hold off;
 
 
 orientation = Direction;
