@@ -50,6 +50,7 @@ function [normim, mask, maskind] = ridgesegment(im, blksze, thresh)
     stddevim = blkproc(im, [blksze blksze], fun);
     
     mask = stddevim > thresh;
+    figure, imshow(mask);
     maskind = find(mask);
     
     % Renormalise image so that the *ridge regions* have zero mean, unit
