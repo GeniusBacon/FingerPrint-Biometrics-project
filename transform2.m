@@ -1,10 +1,6 @@
 % COORDINATION TRANSFORM FUNCTION
-%
-% Usage:  [ Tnew ] = transform2( T, alpha );
-%
 % Argument:   T     - Transformed Minutiae
-%             alpha - Rotation angle
-%               
+%             alpha - Rotation angle             
 % Returns:    Tnew  - T with new coordinations
 
 function [ Tnew ] = transform2( T, alpha )

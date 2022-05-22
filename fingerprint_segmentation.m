@@ -1,25 +1,14 @@
 
 function F3=fingerprint_segmentation(H)
-% Matlab Code for paper (version 1.5): 
-% [1] M. F. Fahmy, and M. A. Thabet, "A fingerprint segmentation technique
-% based on Morphological processing," ISSPIT 2013.
-% 
-% Code written by M. A. Thabet.
-% 
-% Code released for **research purposes only**
-% 
-% Feel free to modify/distribute but please cite [1].
-% 
-% Contact m.a.t.bishay@qmul.ac.uk
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Function to segment fingerprint image using morphological processing.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 H=im2double(H);
-%%% Step 1: Feature Extraction
+
+% Step 1: Feature Extraction
 H1=rangefilt(H); 
-%%% Convert to binary image
+
+% Convert to binary image
 H2=adaptivethreshold(H1,16,0.05,0);
-%%% Step 2: Morphological Processing
+
+% Step 2: Morphological Processing
 SE = strel('disk', 6, 4);
 H3=imclose(~H2,SE);
 H4=imopen(H3,SE);
@@ -43,7 +32,8 @@ s3=size(r,1);
 for i=1:s3
     F(r(i),c(i))=1;
 end
-%%% Step 3: Contour Smoothing
+
+% Step 3: Contour Smoothing
 erf=boundaries(F);
 erf=erf{1};
 z=frdescp(erf);

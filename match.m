@@ -1,12 +1,5 @@
 % FINGERPRINT MATCHING SCORE
-%
-% Usage:  [ S ] = match( M1, M2, display_flag );
-%
-% Argument:   M1 -  First Minutiae 
-%             M2 -  Second Minutiae
-%             display_flag
-%               
-% Returns:    S - Similarity Measure
+
 
 function [ S ] = match( M1, M2, display_flag )
     if nargin==2; display_flag=0; end
@@ -16,12 +9,12 @@ function [ S ] = match( M1, M2, display_flag )
     bi=0; bj=0; ba=0; % Best i,j,alpha
     S=0;            % Best Similarity Score
     for i=1:count1
-        T1=transform(M1,i);
+        T1=transform(M1,i);     
         for j=1:count2
             if M1(i,3)==M2(j,3)
                 T2=transform(M2,j);
-                for a=-5:5                      %Alpha
-                    T3=transform2(T2,a*pi/180);
+                for a=-5:5                   
+                    T3=transform2(T2,a*pi/180);     % transformation with rotation
                     sm=score(T1,T3);
                     if S<sm
                         S=sm;

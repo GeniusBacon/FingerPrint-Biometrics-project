@@ -1,17 +1,7 @@
 % COORDINATION TRANSFORM FUNCTION
-%
-% Usage:  [ T ] = transform( M, i );
-%
 % Argument:   M -  Extracted Minutiae 
-%             i -  Index of reference minutia
-%               
+%             i -  Index of reference minutia               
 % Returns:    T -  M with new coordinations
-
-% Vahid. K. Alilou
-% Department of Computer Engineering
-% The University of Semnan
-%
-% July 2013
 
 function [ T ] = transform( M, i )
     Count=size(M,1);

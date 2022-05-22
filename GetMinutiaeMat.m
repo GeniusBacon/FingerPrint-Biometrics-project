@@ -1,6 +1,10 @@
 function Minutiae  = GetMinutiaeMat(Fingerprint)
+
+    %Image Preprocessing
     [EnhancedImg,Direction,freq]=ImgPreprocessing(Fingerprint);
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+  
+    
     %Feature Extraction
     [bifurcationX,bifurcationY,bifurcationOrientation,ridgeX,ridgeY,RidgeOrientation]  =FeatureExtraction(EnhancedImg,Direction,freq);
     bifurcationSize=size(bifurcationX,1);
@@ -20,4 +24,7 @@ function Minutiae  = GetMinutiaeMat(Fingerprint)
     Minutiae(j,4)=RidgeOrientation(count);
     count=count+1;
     end 
+    
+    
+    
 end

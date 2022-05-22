@@ -1,42 +1,12 @@
-% FREQEST - Estimate fingerprint ridge frequency within image block
-%
-% Function to estimate the fingerprint ridge frequency within a small block
-% of a fingerprint image.  This function is used by RIDGEFREQ
-%
-% Usage:
-%  freqim =  freqest(im, orientim, windsze, minWaveLength, maxWaveLength)
-%
-% Arguments:
-%         im       - Image block to be processed.
-%         orientim - Ridge orientation image of image block.
-%         windsze  - Window length used to identify peaks. This should be
-%                    an odd integer, say 3 or 5.
-%         minWaveLength,  maxWaveLength - Minimum and maximum ridge
-%                     wavelengths, in pixels, considered acceptable.
-% 
-% Returns:
-%         freqim    - An image block the same size as im with all values
-%                     set to the estimated ridge spatial frequency.  If a
-%                     ridge frequency cannot be found, or cannot be found
-%                     within the limits set by min and max Wavlength
-%                     freqim is set to zeros.
-%
-% Suggested parameters for a 500dpi fingerprint image
-%   freqim = freqest(im,orientim, 5, 5, 15);
-%
-% See also:  RIDGEFREQ, RIDGEORIENT, RIDGESEGMENT
-%
-% Note I am not entirely satisfied with the output of this function.
+% FREQEST - ye7seb ridge frequency fl image block el soghayar w yeragga3 el
+% el Arguments:
+%   im       - Image block to be processed.
+%   orientim - Ridge orientation image of image block.
+%   windsze  - Window length used to identify peaks. This should be
+%   an odd integer, say 3 or 5.
+%    minWaveLength,  maxWaveLength - Minimum and maximum ridge
+%    wavelengths, in pixels, considered acceptable.
 
-% Peter Kovesi 
-% School of Computer Science & Software Engineering
-% The University of Western Australia
-% pk at csse uwa edu au
-% http://www.csse.uwa.edu.au/~pk
-%
-% January 2005
-
-    
 function [freqim ,waveLength] =  freqest(im, orientim, windsze, minWaveLength, maxWaveLength)
     waveLength=0;
     debug = 0;
@@ -45,7 +15,7 @@ function [freqim ,waveLength] =  freqest(im, orientim, windsze, minWaveLength, m
     
     % Find mean orientation within the block. This is done by averaging the
     % sines and cosines of the doubled angles before reconstructing the
-    % angle again.  This avoids wraparound problems at the origin.
+    % angle again.
     orientim = 2*orientim(:);    
     cosorient = mean(cos(orientim));
     sinorient = mean(sin(orientim));    
@@ -54,11 +24,12 @@ function [freqim ,waveLength] =  freqest(im, orientim, windsze, minWaveLength, m
     % Rotate the image block so that the ridges are vertical
     rotim = imrotate(im,orient/pi*180+90,'nearest', 'crop');
     
-    % Now crop the image so that the rotated image does not contain any
+    % Now we crop the image so that the rotated image does not contain any
     % invalid regions.  This prevents the projection down the columns
     % from being mucked up.
     cropsze = fix(rows/sqrt(2)); offset = fix((rows-cropsze)/2);
     rotim = rotim(offset:offset+cropsze, offset:offset+cropsze);
+    
     % Sum down the columns to get a projection of the grey values down
     % the ridges.
     proj = sum(rotim);
