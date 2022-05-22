@@ -1,15 +1,14 @@
-% The function that operates on the mask and the skeleton to return all
-% potential ridge endings or bifurcations
+% 
 
 
 function [potentialRidge,potentialBifurcation, cleanImg]=MinutiaeExtraction(skeleton,mask2)
 
 [sizeX, sizeY] = size(skeleton);
 %figure; imshow(skeleton,[]);  axis off; title('skeleton'); hold on;
-figure; imshow(mask2,[]);  axis off; title('mask'); hold on;
+%figure; imshow(mask2,[]);  axis off; title('mask'); hold on;
 Im = ~xor(skeleton, mask2);
 cleanImg = Im;
-figure; imshow(Im,[]);  axis off; title('Im'); hold on;
+%figure; imshow(Im,[]);  axis off; title('Im'); hold on;
 % Window
 WindowSize = 3;
 window = zeros(WindowSize);

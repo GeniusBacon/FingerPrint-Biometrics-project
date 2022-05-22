@@ -1,11 +1,4 @@
-% FREQEST - ye7seb ridge frequency fl image block el soghayar w yeragga3 el
-% el Arguments:
-%   im       - Image block to be processed.
-%   orientim - Ridge orientation image of image block.
-%   windsze  - Window length used to identify peaks. This should be
-%   an odd integer, say 3 or 5.
-%    minWaveLength,  maxWaveLength - Minimum and maximum ridge
-%    wavelengths, in pixels, considered acceptable.
+% FREQEST 
 
 function [freqim ,waveLength] =  freqest(im, orientim, windsze, minWaveLength, maxWaveLength)
     waveLength=0;
