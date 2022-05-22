@@ -38,6 +38,9 @@ for i=1:6
     end
 end
 
+
+
+
  %figure; imshow(pic); axis off; title('pic'); hold on; plot(mFinal(1), mFinal(2), 'bs'); hold off
  
  

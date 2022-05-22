@@ -1,53 +1,13 @@
-% RIDGEFILTER - enhances fingerprint image via oriented filters
-%
-% Function to enhance fingerprint image via oriented filters
-%
-% Usage:
-%  newim =  ridgefilter(im, orientim, freqim, kx, ky, showfilter)
-%
-% Arguments:
-%         im       - Image to be processed.
-%         orientim - Ridge orientation image, obtained from RIDGEORIENT.
-%         freqim   - Ridge frequency image, obtained from RIDGEFREQ.
-%         kx, ky   - Scale factors specifying the filter sigma relative
-%                    to the wavelength of the filter.  This is done so
-%                    that the shapes of the filters are invariant to the
-%                    scale.  kx controls the sigma in the x direction
-%                    which is along the filter, and hence controls the
-%                    bandwidth of the filter.  ky controls the sigma
-%                    across the filter and hence controls the
-%                    orientational selectivity of the filter. A value of
-%                    0.5 for both kx and ky is a good starting point.
-%         showfilter - An optional flag 0/1.  When set an image of the
-%                      largest scale filter is displayed for inspection.
-% 
-% Returns:
-%         newim    - The enhanced image
-%
-% See also: RIDGEORIENT, RIDGEFREQ, RIDGESEGMENT
-
-% Reference: 
-% Hong, L., Wan, Y., and Jain, A. K. Fingerprint image enhancement:
-% Algorithm and performance evaluation. IEEE Transactions on Pattern
-% Analysis and Machine Intelligence 20, 8 (1998), 777 789.
-
-% Peter Kovesi  
-% School of Computer Science & Software Engineering
-% The University of Western Australia
-% pk at csse uwa edu au
-% http://www.csse.uwa.edu.au/~pk
-%
-% January 2005
+% This enhances fingerprint image via oriented filters, using the
+% calculated orientations and frequency.
 
 function newim = ridgefilter(im, orient, freq, kx, ky, showfilter)
 
-    if nargin == 5
+    if nargin == 5      % nargin: the number of function input arguments
         showfilter = 0;
     end
     
-    angleInc = 3;  % Fixed angle increment between filter orientations in
-                   % degrees. This should divide evenly into 180
-    
+    angleInc = 3; 
     im = double(im);
     [rows, cols] = size(im);
     newim = zeros(rows,cols);
@@ -86,10 +46,7 @@ function newim = ridgefilter(im, orient, freq, kx, ky, showfilter)
                 .*cos(2*pi*unfreq(k)*x);
 
             
-        % Generate rotated versions of the filter.  Note orientation
-        % image provides orientation *along* the ridges, hence +90
-        % degrees, and imrotate requires angles +ve anticlockwise, hence
-        % the minus sign.
+        % Generate rotated versions of the filter. 
         for o = 1:180/angleInc
             filter{k,o} = imrotate(reffilter,-(o*angleInc+90),'bilinear','crop'); 
         end
@@ -124,6 +81,8 @@ function newim = ridgefilter(im, orient, freq, kx, ky, showfilter)
         
         s = sze(filterindex);   
         newim(r,c) = sum(sum(im(r-s:r+s, c-s:c+s).*filter{filterindex,orientindex(r,c)}));
+
+    
     end
 
     

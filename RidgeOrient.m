@@ -1,6 +1,6 @@
 function [Coherence,Direction]=RidgeOrient(Img,hsize,hsigma,hsize2,hsigma2)
 
-h = fspecial('gaussian', hsize, hsigma);
+h = fspecial('gaussian', hsize, hsigma);        % removes noise 
 [hx,hy] = gradient(h);
 Gx = filter2(hx, Img);
 Gy = filter2(hy, Img);
@@ -22,8 +22,6 @@ Imax = Gyy+Gxx - minima;
 z = .001;
 Coherence = 1 - minima./(Imax+z);
 Coherence = Coherence.*(denom>z);
-
-
 
 
 end

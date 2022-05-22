@@ -1,4 +1,9 @@
+% The function that operates on the mask and the skeleton to return all
+% potential ridge endings or bifurcations
+
+
 function [potentialRidge,potentialBifurcation, cleanImg]=MinutiaeExtraction(skeleton,mask2)
+
 [sizeX, sizeY] = size(skeleton);
 %figure; imshow(skeleton,[]);  axis off; title('skeleton'); hold on;
 %figure; imshow(mask2,[]);  axis off; title('mask'); hold on;
@@ -10,7 +15,6 @@ WindowSize = 3;
 window = zeros(WindowSize);
 border = floor(WindowSize/2);
 center = border+1;
-% Temporary data to work with
 row = sizeX + 2*border;
 col = sizeY + 2*border;
 double temp(row,col);
@@ -35,9 +39,12 @@ for x = (center+10):(sizeX+border-10)
             
             potentialRidge(x,y)       = sum(sum(~window));
             potentialBifurcation(x,y) = sum(sum(~window));
+            
+            % BorderBool is used to find if a certain minutiae is on the
+            % border of the mask to ignore them to avoid noisy regions.
             borderBool = isBorder(mask2, x, y);
             if (borderBool == 1)
-                potentialRidge(x,y) = -1;       % done to prevent borders
+                potentialRidge(x,y) = -1; 
                 potentialBifurcation(x,y) = -1;
             end
         end

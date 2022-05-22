@@ -5,12 +5,6 @@
 % Argument:   X -  Data Points
 %             y -  Plot Style (1 for blue, 2 for red, ...)
 
-% Vahid. K. Alilou
-% Department of Computer Engineering
-% The University of Semnan
-%
-% July 2013
-
 function plot_data( X,y )
     N=size(X,1); r=15;
     hold on; axis equal;
